@@ -1,0 +1,17 @@
+{
+	"extends": "./tsconfigs/tsconfig.base.json",
+	"include": ["src"],
+	"exclude": [
+		"dist",
+		"node_modules",
+		"src/**/*.spec.*",
+		"src/**/*.test.*"
+	],
+	"compilerOptions": {
+		"typeRoots": [
+			"@types",
+			"node_modules/@types"
+		]
+	},
+	"files": ["./src/index.ts", "./typings/mixins.d.ts"]
+}
