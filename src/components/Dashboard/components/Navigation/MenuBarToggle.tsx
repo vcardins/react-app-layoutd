@@ -12,7 +12,7 @@ interface IMenuBarToggleProps {
 	isNavPaneOpen?: boolean;
 }
 
-const MenuBarToggleContainer = styled(Box)<IMenuBarToggleProps>(({ theme, width, isNavPaneOpen }) => `
+const MenuBarToggleContainer = styled(Box)<IMenuBarToggleProps>(({ theme }) => `
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
