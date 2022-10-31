@@ -63,7 +63,7 @@ const StyledListItemText = styled(ListItemText, { shouldForwardProp: (prop) => p
 
 export const MenuItem = (props: INavItem & { tooltip?: string }) => {
 	const { isNavPaneOpen, settings } = useLayoutContext();
-	const { id, route, label, selected, tooltip, onClick } = props;
+	const { id, url, label, selected, tooltip, onClick } = props;
 	const Icon = (props.Icon ? (props.Icon as INavItem['Icon']) : null) as any;
 
 	let link = (
@@ -90,11 +90,12 @@ export const MenuItem = (props: INavItem & { tooltip?: string }) => {
 		);
 	}
 
-	return route?.path ? (
-		<StyledNavLink id={id} to={route.path}>
-			{link}
-		</StyledNavLink>
-	) : (
-		<span id={id}>{link}</span>
-	);
+	return url
+		? (
+			<StyledNavLink id={id} to={url}>
+				{link}
+			</StyledNavLink>
+		) : (
+			<span id={id}>{link}</span>
+		);
 };

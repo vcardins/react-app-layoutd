@@ -44,10 +44,10 @@ interface IMenuItemContainerProps {
 export const MenuItemContainer = ({ item, children }: IMenuItemContainerProps) => {
 	switch (item.type) {
 		case NavItemType.Route:
-			return <NavItemRoute to={item.route?.path}>{children}</NavItemRoute>;
+			return <NavItemRoute to={item.url}>{children}</NavItemRoute>;
 		case NavItemType.Link:
 			return (
-				<NavItemLink href={item.route?.path} target={item.target}>
+				<NavItemLink href={item.url} target={item.target}>
 					{children}
 				</NavItemLink>
 			);

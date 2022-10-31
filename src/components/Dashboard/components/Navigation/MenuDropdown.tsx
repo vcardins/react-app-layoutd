@@ -23,8 +23,8 @@ export const MenuDropdown = ({ item }: { item: INavItem }) => {
 
 	const handleMenuOptionClick = useCallback(
 		(event: MouseEvent<HTMLLIElement>, option: INavItem) => {
-			if (option.route) {
-				navigate(option.route.path);
+			if (option.url) {
+				navigate(option.url);
 				handleClose();
 			}
 

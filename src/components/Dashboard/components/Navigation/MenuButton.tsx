@@ -13,8 +13,8 @@ export const MenuButton = ({ item }: { item: INavItem }) => {
 	const handleClick = useCallback(
 		(event: MouseEvent<HTMLButtonElement>) => {
 			event.stopPropagation();
-			if (item.route) {
-				return navigate(item.route.path);
+			if (item.url) {
+				return navigate(item.url);
 			}
 
 			item.onClick?.(event, item);

@@ -31,7 +31,7 @@ export const MenuItemsList = () => {
 							{...nav}
 							key={nav.id}
 							tooltip={!isNavPaneOpen ? `${nav.label}${nav.disabled ? ' 🚫' : ''}` : undefined}
-							selected={pathname === nav.route?.path}
+							selected={pathname === nav.url}
 						/>
 					))}
 				</List>
