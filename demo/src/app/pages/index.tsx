@@ -8,7 +8,7 @@ import {
 	FullscreenExit as FullscreenExitIcon,
 	Settings as SettingsIcon,
 } from '@mui/icons-material';
-import { INavigation } from 'react-app-layouts';
+import { INavigation, IPageConfig } from 'react-app-layouts';
 
 import { PageKey } from '../types';
 import { HomePageConfig } from './home';
@@ -17,7 +17,7 @@ import { ForbiddenPageConfig, NotFoundPageConfig } from './error';
 
 import { getNavId } from './utils';
 
-export const pages = [
+export const pages: IPageConfig[] = [
 	HomePageConfig,
 	Page2PageConfig,
 	ForbiddenPageConfig,
