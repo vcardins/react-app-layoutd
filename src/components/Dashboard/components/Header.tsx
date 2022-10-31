@@ -1,0 +1,63 @@
+import { AppBar, Toolbar, Box, styled } from '@mui/material';
+
+import { MenuDropdown, MenuButton, MenuBarToggle } from './Navigation';
+import { Title } from './Title';
+
+import { useLayoutContext } from '../../../context';
+import { INavItem, ITopBarNavigation } from '../../../types';
+
+export const StyledAppBar = styled(AppBar)(({ theme }) => `
+	display: flex;
+	width: 100%;
+	background-color: ${theme.palette.common.white};
+	color: ${theme.palette.common.black};
+	flex-direction: row;
+`);
+
+export const StyledToolbar = styled(Toolbar)`
+ 	width: 100%;
+	display: flex;
+`;
+
+export const ActionBarGroup = styled(Box)`
+	flex: 1 1;
+	align-items: center;
+	justify-content: space-between;
+	margin-left: 1rem;
+`;
+
+export const ActionBar = styled(Box)`
+	gap: 10px;
+	align-items: center;
+`;
+
+export const Header = () => {
+	const { navigation, settings } = useLayoutContext();
+	const headerNavKeys = Object.keys(navigation?.header ?? {});
+
+	if (!navigation?.header || !headerNavKeys?.length) {
+		return null;
+	}
+
+	return (
+		<StyledAppBar elevation={settings.header.shadowElevation}>
+			<MenuBarToggle source="header" />
+			<Box display="flex" flex="1">
+				{settings.displayTitle ? <Title /> : null }
+				<StyledToolbar sx={{ justifyContent: headerNavKeys.length > 1 ? 'space-between' : 'end' }}>
+					{headerNavKeys.map((key) => (
+						<ActionBar key={key} sx={{ display: { xs: 'none', md: 'flex' } }}>
+							{(navigation.header?.[key as keyof ITopBarNavigation] as INavItem[]).map((item) =>
+								item.children?.length ? (
+									<MenuDropdown key={item.id} item={item} />
+								) : (
+									<MenuButton key={item.id} item={item} />
+								),
+							)}
+						</ActionBar>
+					))}
+				</StyledToolbar>
+			</Box>
+		</StyledAppBar>
+	);
+};
