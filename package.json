@@ -1,6 +1,6 @@
 {
 	"name": "react-app-layouts",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"description": "",
 	"main": "./dist/cjs/index.js",
 	"module": "./dist/cjs/index.js",
@@ -76,6 +76,7 @@
 		"@emotion/styled": "^11.10.4",
 		"@mui/icons-material": "^5.10.9",
 		"@mui/material": "^5.10.10",
+		"deepmerge-ts": "^4.2.2",
 		"react-router": "^6.4.2",
 		"react-router-dom": "^6.4.2"
 	},

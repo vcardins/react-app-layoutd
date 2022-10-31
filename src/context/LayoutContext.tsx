@@ -1,7 +1,7 @@
 import { useMemo, createContext, useContext, useState, useCallback } from 'react';
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
-import { deepmerge } from "deepmerge-ts";
+import { deepmerge } from 'deepmerge-ts';
 
 import {
 	IRoute,
