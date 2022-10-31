@@ -117,10 +117,6 @@ export const buildTheme = (mode = ThemeMode.Light, themeColor?: string) =>
 						backgroundColor: 'rgb(241, 245, 249)',
 					},
 				},
-				navbar: {
-					width: '200px',
-					padding: '0.2rem',
-				},
-			},
+			} as any,
 		}),
 	);

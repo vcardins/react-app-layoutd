@@ -9,9 +9,14 @@ const StyledNavLink = styled(NavLink)`
 	color: inherit;
 `;
 
-export const StyledListItem = styled(ListItem, { shouldForwardProp: (prop) => prop !== 'iconPositioning' })<{iconPositioning?: Positioning;}>(({ iconPositioning, theme }) => `
-	padding-top: ${theme.mixins.navbar?.padding ?? theme.spacing(0.5)};
-	padding-bottom: ${theme.mixins.navbar?.padding ?? theme.spacing(0.5)};
+const forwardProps = ['backgroundImage', 'spaced', 'isNavPaneOpen'];
+const checkForwardProps = (prop: string) => !forwardProps.includes(prop as string);
+
+export const StyledListItem = styled(ListItem, { shouldForwardProp: checkForwardProps })<{iconPositioning?: Positioning; spaced?: boolean; isNavPaneOpen?: boolean }>(({ iconPositioning, spaced, theme, isNavPaneOpen }) => `
+	padding: ${theme.spacing(0.5)} 0 ${theme.spacing(0.5)} ${isNavPaneOpen ? theme.spacing(2) : 0};
+	margin-bottom: ${spaced ? theme.spacing(0.75) : 0};
+	border-radius: ${spaced ? '4px' : 0};
+	transition: background-color 0.3s ease, width 0.3 linear;
 
 	.MuiTypography-root {
 		color: ${theme.palette.common.white};
@@ -19,6 +24,13 @@ export const StyledListItem = styled(ListItem, { shouldForwardProp: (prop) => pr
 
 	&.Mui-selected {
 		background-color: ${theme.palette.primary.light};
+	}
+
+	&:not(&.Mui-selected):hover {
+		background-color: ${theme.palette.primary.dark};
+		* {
+			color: ${theme.palette.common.white};
+		}
 	}
 
 	flex-direction: ${iconPositioning === Positioning.Right
@@ -29,37 +41,24 @@ export const StyledListItem = styled(ListItem, { shouldForwardProp: (prop) => pr
 				? 'column'
 				: iconPositioning === Positioning.Top
 					? 'column-reverse'
-					: undefined
-};
+					: undefined};
 
-	gap: ${iconPositioning && [Positioning.Right, Positioning.Left].includes(iconPositioning) ? theme.spacing(2.5) : 0};
-
-	&:not(&.Mui-selected):hover {
-		background-color: ${theme.palette.primary.dark};
-		* {
-			color: ${theme.palette.common.white};
-		}
-	}
+	gap: ${(iconPositioning && [Positioning.Right, Positioning.Left].includes(iconPositioning)) || !isNavPaneOpen
+		? theme.spacing(2.5)
+		: 0};
 `);
 
-const StyledListItemIcon = styled(ListItemIcon, { shouldForwardProp: (prop) => prop !== 'selected' })<{
-	selected?: boolean;
-}>(
-	({ theme }) => `
-	min-width: auto;
+const StyledListItemIcon = styled(ListItemIcon, { shouldForwardProp: (prop) => prop !== 'selected' })<{ selected?: boolean; isNavPaneOpen?: boolean }>(({ theme, isNavPaneOpen }) => `
+	min-width: ${!isNavPaneOpen ? '100%' : 'auto'};
+	${!isNavPaneOpen ? 'justify-content: center' : undefined};
 	color: ${theme.palette.common.white};
-`,
-);
+`);
 
-const StyledListItemText = styled(ListItemText, { shouldForwardProp: (prop) => prop !== 'hidden' })<{
-	hidden?: boolean;
-}>(
-	({ hidden }) => `
+const StyledListItemText = styled(ListItemText, { shouldForwardProp: (prop) => prop !== 'hidden' })<{ hidden?: boolean; }>( ({ hidden }) => `
 	white-space: nowrap;
 	visibility: ${hidden ? 'collapse' : 'visible'};
 	transition: visibility ease 0.25s;
-`,
-);
+`);
 
 export const MenuItem = (props: INavItem & { tooltip?: string }) => {
 	const { isNavPaneOpen, settings } = useLayoutContext();
@@ -70,11 +69,14 @@ export const MenuItem = (props: INavItem & { tooltip?: string }) => {
 		<StyledListItem
 			id={id}
 			selected={selected}
+			disablePadding
 			iconPositioning={settings.sidebar.iconPositioning}
+			spaced={settings.sidebar.spacedItems}
+			isNavPaneOpen={isNavPaneOpen}
 			onClick={(e) => onClick?.(e, props)}
 		>
 			{Icon ? (
-				<StyledListItemIcon selected={selected}>
+				<StyledListItemIcon selected={selected} isNavPaneOpen={isNavPaneOpen}>
 					<Icon />
 				</StyledListItemIcon>
 			) : null}

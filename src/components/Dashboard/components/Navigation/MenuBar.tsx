@@ -16,11 +16,12 @@ export const StyledNavigation = styled(MuiDrawer, { shouldForwardProp: (prop) =>
 	isOpened: boolean;
 	widths: { collapsed: CSSProperties['width']; expanded: CSSProperties['width']; }
 }>(({ isOpened, widths, theme }) => ({
-	width: isOpened ? widths.expanded : theme.spacing(7),
+	width: isOpened ? widths.expanded : widths.collapsed,
 	height: '100%',
 	overflow: 'auto',
 	transition: getTransition(theme, isOpened ? 'enteringScreen' : 'leavingScreen'),
 	'& .MuiDrawer-paper': {
+		border: 0,
 		backgroundColor: theme.mixins.navbar?.backgroundColor ?? theme.palette.primary.main,
 		color: theme.mixins.navbar?.color ?? theme.palette.common.white,
 		position: 'static',

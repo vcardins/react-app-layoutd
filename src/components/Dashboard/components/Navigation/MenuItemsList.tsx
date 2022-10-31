@@ -15,7 +15,7 @@ const MenuItemsListWrapper = styled(Grid)`
 `;
 
 export const MenuItemsList = () => {
-	const { isNavPaneOpen, navigation } = useLayoutContext();
+	const { isNavPaneOpen, navigation, settings } = useLayoutContext();
 	const { pathname } = useLocation();
 
 	if (!navigation?.sidebar?.top?.length && !navigation?.sidebar?.bottom?.length) {
@@ -25,7 +25,11 @@ export const MenuItemsList = () => {
 	return (
 		<MenuItemsListWrapper>
 			{Object.keys(navigation?.sidebar).map((key) => (
-				<List key={key} id={`${key}-menu`} sx={{ p: 0 }}>
+				<List
+					key={key}
+					id={`sidebar-${key}-menu`}
+					sx={{ p: settings.sidebar.spacedItems ? 1 : 0 }}
+				>
 					{(navigation?.sidebar?.[key as keyof ISideBarNavigation] as INavItem[]).map((nav) => (
 						<MenuItem
 							{...nav}

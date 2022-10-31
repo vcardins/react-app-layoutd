@@ -6,6 +6,7 @@ interface INavigationSettings {
 	display: boolean;
 	iconPositioning: Positioning;
 	fontSize: CSSProperties['fontSize'];
+	spacedItems: boolean;
 }
 
 export interface ISettings {

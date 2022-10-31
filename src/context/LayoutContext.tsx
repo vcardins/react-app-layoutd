@@ -32,12 +32,14 @@ const defaultSettings: ISettings = {
 		position: Positioning.Left,
 		fontSize: '14px',
 		width: { collapsed: '56px', expanded: '200px' },
+		spacedItems: false,
 	},
 	header: {
 		display: true,
 		iconPositioning: Positioning.Left,
 		fontSize: '14px',
 		shadowElevation: 2,
+		spacedItems: false,
 	},
 };
 

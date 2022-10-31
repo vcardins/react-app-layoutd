@@ -6,22 +6,21 @@ import {
 } from '@mui/icons-material';
 
 import { useLayoutContext } from '../../../../context';
-import { CSSProperties } from 'react';
 
 
 interface IMenuBarToggleProps {
-	width: CSSProperties['width'];
+	isNavPaneOpen?: boolean;
 }
 
-const MenuBarToggleContainer = styled(Box)<IMenuBarToggleProps>(({ width }) => `
-	width: ${width};
+const MenuBarToggleContainer = styled(Box)<IMenuBarToggleProps>(({ theme, width, isNavPaneOpen }) => `
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
+	padding: ${theme.spacing(1)};
 `);
 
 export const MenuBarToggle = ({ source }: { source: 'header' | 'sidebar'}) => {
-	const { isNavPaneOpen, toggleNavPane, navigation, settings } = useLayoutContext();
+	const { isNavPaneOpen, toggleNavPane, navigation } = useLayoutContext();
 
 	if (!Object.keys(navigation?.sidebar ?? {})?.length) {
 		return null;
@@ -30,7 +29,7 @@ export const MenuBarToggle = ({ source }: { source: 'header' | 'sidebar'}) => {
 	const ExpandIcon = source === 'header' ? MenuIcon : ChevronRightIcon;
 
 	return (
-		<MenuBarToggleContainer width={settings.sidebar.width?.collapsed}>
+		<MenuBarToggleContainer isNavPaneOpen={isNavPaneOpen}>
 			<IconButton
 				color="inherit"
 				onClick={() => toggleNavPane?.(!isNavPaneOpen)}
