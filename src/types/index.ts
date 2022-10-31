@@ -19,3 +19,6 @@ export * from './Positioning';
 export * from './ToolbarPositions';
 export * from './ScrollOptions';
 export * from './NavItemType';
+
+// type
+export * from './Subset';
