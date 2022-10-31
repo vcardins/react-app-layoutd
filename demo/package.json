@@ -1,0 +1,37 @@
+{
+	"name": "react-app-layouts-demo",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"clean": "rm -rf ./dist && rm -rf ./.parcel-cache",
+		"start": "parcel src/index.html",
+		"start:link": "npm run clean && npm run link && npm start",
+		"link": "npm-run-all -s link:*",
+		"link:lib-self": "cd .. && npm link",
+		"link:lib-react": "cd .. && npm link ./demo/node_modules/react",
+		"link:app-to-lib": "npm link react-app-layouts"
+	},
+	"devDependencies": {
+		"@types/react": "^18.0.21",
+		"@types/react-dom": "^18.0.6",
+		"css-loader": "^6.7.1",
+		"npm-run-all": "^4.1.5",
+		"parcel": "^2.7.0",
+		"process": "^0.11.10",
+		"react-router-dom": "^6.4.2",
+		"ts-loader": "^9.4.1",
+		"typescript": "^4.8.4"
+	},
+	"dependencies": {
+		"@emotion/react": "^11.10.4",
+		"@emotion/styled": "^11.10.4",
+		"@mui/icons-material": "^5.10.9",
+		"@mui/material": "^5.10.10",
+		"react-app-layouts": "^0.0.4",
+		"screenfull": "^6.0.2"
+	},
+	"peerDependencies": {
+		"react": "^18",
+		"react-dom": "^18"
+	}
+}
