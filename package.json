@@ -34,7 +34,7 @@
 		"build:esm": "tsc -p ./tsconfigs/tsconfig.esm.json && mv dist/esm/index.js dist/esm/index.mjs",
 		"build:cjs": "tsc -p ./tsconfigs/tsconfig.cjs.json",
 		"prepare": "npm run build",
-		"prepublishOnly": "npm test && npm run prettier && npm run lint"
+		"prepublishOnly": "npm test && npm run lint"
 	},
 	"keywords": [
 		"react",
