@@ -15,6 +15,7 @@ import {
 import { useRoutingContext } from './RoutingContext';
 
 import { CenteredBoxLayout, EmptyLayout, DashboardLayout, TwoColumnLayout } from '../components';
+import { useLocalStorage } from '../utils';
 
 export const LayoutMap = {
 	[LayoutStyle.CenteredBox]: CenteredBoxLayout,
@@ -55,9 +56,12 @@ const LayoutContext = createContext<IAppLayoutContext>({
 	updateSettings: (_value: ISettings) => undefined,
 });
 
+interface ILayoutState extends Pick<IAppLayoutProps, 'isNavPaneOpen'>{}
+
 export const LayoutContextProvider = (props: IAppLayoutProps) => {
 	const { metadata, children, theme, ...rest } = props;
-	const [isNavPaneOpen, toggleNavPane] = useState(!!rest.isNavPaneOpen);
+	const { storedValue, setStoredValue } = useLocalStorage<ILayoutState>('layoutState', { isNavPaneOpen: !!rest.isNavPaneOpen });
+	const [isNavPaneOpen, toggleNavPane] = useState(storedValue.isNavPaneOpen);
 	const [settings, setSettings] = useState(deepmerge(defaultSettings, rest.settings) as ISettings);
 	const [navigation, setNavigation] = useState(rest.navigation);
 	const { renderedRoutes, activeRoute } = useRoutingContext();
@@ -74,6 +78,11 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 		setNavigation((prevValue) => deepmerge(prevValue, value));
 	}, []);
 
+	const handleToggleNavPane = useCallback((isNavPaneOpen: boolean) => {
+		toggleNavPane(isNavPaneOpen);
+		setStoredValue({ ... storedValue, isNavPaneOpen });
+	}, [setStoredValue, storedValue]);
+
 	const value = useMemo<IAppLayoutContext>(
 		() => ({
 			...rest,
@@ -84,7 +93,7 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 			settings,
 			navigation,
 			isNavPaneOpen,
-			toggleNavPane,
+			toggleNavPane: handleToggleNavPane,
 			updateSettings,
 			updateNavigation,
 		}),
@@ -97,7 +106,7 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 			isNavPaneOpen,
 			navigation,
 			settings,
-			toggleNavPane,
+			handleToggleNavPane,
 			updateSettings,
 			updateNavigation,
 		],
