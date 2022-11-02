@@ -14,10 +14,11 @@ export const StyledAppBar = styled(AppBar)(({ theme }) => `
 	flex-direction: row;
 `);
 
-export const StyledToolbar = styled(Toolbar)`
+export const StyledToolbar = styled(Toolbar)<{ multiple: boolean }>(({ multiple }) => `
  	width: 100%;
 	display: flex;
-`;
+	justify-content: ${multiple ? 'space-between' : 'end' };
+`);
 
 export const ActionBarGroup = styled(Box)`
 	flex: 1 1;
@@ -43,10 +44,13 @@ export const Header = () => {
 		<StyledAppBar elevation={settings.header.shadowElevation}>
 			<MenuBarToggle source="header" />
 			<Box display="flex" flex="1">
-				{settings.displayTitle ? <Title /> : null }
-				<StyledToolbar sx={{ justifyContent: headerNavKeys.length > 1 ? 'space-between' : 'end' }}>
+				<Title />
+				<StyledToolbar multiple={headerNavKeys.length > 1}>
 					{headerNavKeys.map((key) => (
-						<ActionBar key={key} sx={{ display: { xs: 'none', md: 'flex' } }}>
+						<ActionBar
+							key={key}
+							sx={{ display: { xs: 'none', md: 'flex' } }}
+						>
 							{(navigation.header?.[key as keyof ITopBarNavigation] as INavItem[]).map((item) =>
 								item.children?.length ? (
 									<MenuDropdown key={item.id} item={item} />

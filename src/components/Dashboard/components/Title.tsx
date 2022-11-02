@@ -34,9 +34,9 @@ export const StyledAppHeaderWrapper = styled('div', { shouldForwardProp: (prop) 
 `);
 
 export const Title = () => {
-	const { metadata, Icon, ids } = useLayoutContext();
+	const { metadata, Icon, ids, settings } = useLayoutContext();
 
-	if (!Icon && !metadata.name) {
+	if ((!Icon && !metadata.name) || !settings.displayTitle) {
 		return null;
 	}
 
