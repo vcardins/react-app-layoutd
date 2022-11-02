@@ -29,7 +29,7 @@ export const MenuBarToggle = ({ source }: { source: 'header' | 'sidebar'}) => {
 	const ExpandIcon = source === 'header' ? MenuIcon : ChevronRightIcon;
 
 	return (
-		<MenuBarToggleContainer isNavPaneOpen={isNavPaneOpen}>
+		<MenuBarToggleContainer>
 			<IconButton
 				color="inherit"
 				onClick={() => toggleNavPane?.(!isNavPaneOpen)}
