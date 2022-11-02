@@ -7,12 +7,6 @@ export const StyledAppTitleWrapper = styled('div')`
 	flex-direction: column;
 `;
 
-const StyledAppIcon = styled('div')(({ theme }) => `
-	display: flex;
-	flex-direction: column;
-	margin-right: ${theme.spacing(2)};
-`);
-
 export const StyledAppTitle = styled(Typography)`
 	display: {
 		xs: none;
@@ -34,22 +28,14 @@ export const StyledAppHeaderWrapper = styled('div', { shouldForwardProp: (prop) 
 `);
 
 export const Title = () => {
-	const { metadata, Icon, ids, settings } = useLayoutContext();
+	const { metadata, ids, settings } = useLayoutContext();
 
-	if ((!Icon && !metadata.name) || !settings.displayTitle) {
+	if (!metadata.name || !settings.displayTitle) {
 		return null;
 	}
 
 	return (
 		<StyledAppHeaderWrapper>
-			{Icon ?
-				(
-					<StyledAppIcon>
-						{Icon}
-					</StyledAppIcon>
-				)
-				: null
-			}
 			<StyledAppTitleWrapper>
 				<StyledAppTitle id={ids?.title} variant="h6" noWrap>
 					{metadata.name}

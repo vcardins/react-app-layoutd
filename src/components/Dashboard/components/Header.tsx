@@ -32,8 +32,16 @@ export const ActionBar = styled(Box)`
 	align-items: center;
 `;
 
+
+const StyledAppIcon = styled('div')(({ theme }) => `
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 ${theme.spacing(3)} 0 ${theme.spacing(2)};
+`);
+
 export const Header = () => {
-	const { navigation, settings } = useLayoutContext();
+	const { navigation, Icon, settings } = useLayoutContext();
 	const headerNavKeys = Object.keys(navigation?.header ?? {});
 
 	if (!navigation?.header || !headerNavKeys?.length) {
@@ -44,6 +52,14 @@ export const Header = () => {
 		<StyledAppBar elevation={settings.header.shadowElevation}>
 			<MenuBarToggle source="header" />
 			<Box display="flex" flex="1">
+				{Icon ?
+					(
+						<StyledAppIcon>
+							{Icon}
+						</StyledAppIcon>
+					)
+					: null
+				}
 				<Title />
 				<StyledToolbar multiple={headerNavKeys.length > 1}>
 					{headerNavKeys.map((key) => (
