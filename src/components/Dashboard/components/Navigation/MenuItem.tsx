@@ -9,10 +9,9 @@ const StyledNavLink = styled(NavLink)`
 	color: inherit;
 `;
 
-const forwardProps = ['backgroundImage', 'spaced', 'isNavPaneOpen'];
-const checkForwardProps = (prop: string) => !forwardProps.includes(prop as string);
+const getForwardProps = (forwardProps: string[]) => (prop: string) => !forwardProps.includes(prop as string);
 
-export const StyledListItem = styled(ListItem, { shouldForwardProp: checkForwardProps })<{iconPositioning?: Positioning; spaced?: boolean; isNavPaneOpen?: boolean }>(({ iconPositioning, spaced, theme, isNavPaneOpen }) => `
+export const StyledListItem = styled(ListItem, { shouldForwardProp: getForwardProps(['backgroundImage', 'spaced', 'isNavPaneOpen', 'iconPositioning']) })<{iconPositioning?: Positioning; spaced?: boolean; isNavPaneOpen?: boolean }>(({ iconPositioning, spaced, theme, isNavPaneOpen }) => `
 	padding: ${theme.spacing(0.5)} 0 ${theme.spacing(0.5)} ${isNavPaneOpen ? theme.spacing(2) : 0};
 	margin-bottom: ${spaced ? theme.spacing(0.75) : 0};
 	border-radius: ${spaced ? '4px' : 0};
@@ -48,13 +47,13 @@ export const StyledListItem = styled(ListItem, { shouldForwardProp: checkForward
 		: 0};
 `);
 
-const StyledListItemIcon = styled(ListItemIcon, { shouldForwardProp: (prop) => prop !== 'selected' })<{ selected?: boolean; isNavPaneOpen?: boolean }>(({ theme, isNavPaneOpen }) => `
+const StyledListItemIcon = styled(ListItemIcon, { shouldForwardProp: getForwardProps(['selected', 'isNavPaneOpen']) })<{ selected?: boolean; isNavPaneOpen?: boolean }>(({ theme, isNavPaneOpen }) => `
 	min-width: ${!isNavPaneOpen ? '100%' : 'auto'};
 	${!isNavPaneOpen ? 'justify-content: center' : undefined};
 	color: ${theme.palette.common.white};
 `);
 
-const StyledListItemText = styled(ListItemText, { shouldForwardProp: (prop) => prop !== 'hidden' })<{ hidden?: boolean; }>( ({ hidden }) => `
+const StyledListItemText = styled(ListItemText, { shouldForwardProp: getForwardProps(['hidden']) })<{ hidden?: boolean; }>( ({ hidden }) => `
 	white-space: nowrap;
 	visibility: ${hidden ? 'collapse' : 'visible'};
 	transition: visibility ease 0.25s;
