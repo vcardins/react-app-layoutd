@@ -20,8 +20,7 @@ export function useLocalStorage<T = unknown>(
 			return typeof transform === 'function'
 				? (transform(item) as T)
 				: item;
-		}
-		catch (error) {
+		} catch (error) {
 			// If error also return initialValue
 			return initialValue as T;
 		}
@@ -42,8 +41,7 @@ export function useLocalStorage<T = unknown>(
 				setValue(valueToStore);
 				// Save to local storage
 				window.localStorage.setItem(key, JSON.stringify(valueToStore));
-			}
-			catch (error) {
+			} catch (error) {
 				// A more advanced implementation would handle the error case
 			}
 		},

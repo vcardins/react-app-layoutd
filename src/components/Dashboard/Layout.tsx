@@ -56,4 +56,4 @@ export const DashboardLayout = ({ id, transitionEffect = TransitionEffect.Fade, 
 			<Footer />
 		</OuterContainer>
 	);
-}
+};

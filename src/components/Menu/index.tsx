@@ -72,8 +72,7 @@ export const Menu = (props: IMenuProps) => {
 			if (index > -1) {
 				newActiveMenus.splice(index, 1);
 			}
-		}
-		else {
+		} else {
 			newActiveMenus.push(menuKey);
 		}
 
