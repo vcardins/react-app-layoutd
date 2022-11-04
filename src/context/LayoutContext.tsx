@@ -11,6 +11,7 @@ import {
 	INavigation,
 	ISettings,
 	Positioning,
+	TransitionEffect,
 } from '../types';
 import { useRoutingContext } from './RoutingContext';
 
@@ -47,6 +48,7 @@ const defaultSettings: ISettings = {
 const LayoutContext = createContext<IAppLayoutContext>({
 	id: '',
 	renderedRoutes: null,
+	transitionEffect: TransitionEffect.Fade,
 	metadata: {} as IAppLayoutProps['metadata'],
 	activeRoute: {} as IRoute,
 	isNavPaneOpen: false,
@@ -59,7 +61,7 @@ const LayoutContext = createContext<IAppLayoutContext>({
 interface ILayoutState extends Pick<IAppLayoutProps, 'isNavPaneOpen'>{}
 
 export const LayoutContextProvider = (props: IAppLayoutProps) => {
-	const { metadata, children, theme, ...rest } = props;
+	const { metadata, children, theme, transitionEffect, ...rest } = props;
 	const { storedValue, setStoredValue } = useLocalStorage<ILayoutState>('layoutState', { isNavPaneOpen: !!rest.isNavPaneOpen });
 	const [isNavPaneOpen, toggleNavPane] = useState(storedValue.isNavPaneOpen);
 	const [settings, setSettings] = useState(deepmerge(defaultSettings, rest.settings) as ISettings);
@@ -122,6 +124,7 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 							id={layoutId}
 							activeRoute={activeRoute}
 							renderedRoutes={renderedRoutes}
+							transitionEffect={transitionEffect}
 						/>
 						{children}
 					</>

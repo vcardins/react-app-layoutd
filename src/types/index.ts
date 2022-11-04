@@ -19,6 +19,7 @@ export * from './Positioning';
 export * from './ToolbarPositions';
 export * from './ScrollOptions';
 export * from './NavItemType';
+export * from './TransitionEffect';
 
 // type
 export * from './Subset';

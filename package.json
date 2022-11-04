@@ -79,6 +79,7 @@
 		"deepmerge-ts": "^4.2.2",
 		"react-router": "^6.4.2",
 		"react-router-dom": "^6.4.2"
+		"react-spring": "^9.5.5"
 	},
 	"peerDependencies": {
 		"react": ">=17"

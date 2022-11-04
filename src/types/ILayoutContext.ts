@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-import { IRoute, IAppConfig, INavigation, ISettings } from './';
+import { IRoute, IAppConfig, INavigation, ISettings, TransitionEffect } from './';
 
-export interface IAppLayoutProps extends Pick<IAppConfig, 'theme' | 'navigation' | 'metadata' | 'Icon' | 'settings'> {
+export interface IAppLayoutProps extends Pick<IAppConfig, 'theme' | 'navigation' | 'metadata' | 'Icon' | 'settings' | 'transitionEffect'> {
 	children?: ReactNode;
 	components?: {
 		header?: ReactNode;
@@ -21,6 +21,7 @@ export interface ILayoutProps {
 	id: string;
 	activeRoute: IRoute;
 	renderedRoutes: ReactNode;
+	transitionEffect?: TransitionEffect;
 }
 
 export interface IAppLayoutContext extends Omit<IAppLayoutProps, 'name' | 'theme' | 'settings'>, ILayoutProps {

@@ -1,4 +1,4 @@
-import { render } from 'react-app-layouts';
+import { render, TransitionEffect } from 'react-app-layouts';
 
 import { pages, navigation, buildTheme, Providers } from './app';
 import metadata from './manifest.json';
@@ -10,9 +10,11 @@ render({
 	navigation,
 	pages,
 	version: process?.env?.['VERSION'],
+	transitionEffect: TransitionEffect.Slide,
 	Providers,
 	Icon: <Logo size={40} />,
 	settings: {
 		header: { shadowElevation: 1 },
+		sidebar: { spacedItems: true, width: { collapsed: '55px', expanded: '220px' } },
 	},
 });
