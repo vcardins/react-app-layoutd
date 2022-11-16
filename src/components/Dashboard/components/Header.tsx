@@ -1,3 +1,4 @@
+import { isValidElement } from 'react';
 import { AppBar, Toolbar, Box, styled } from '@mui/material';
 
 import { MenuDropdown, MenuButton, MenuBarToggle } from './Navigation';
@@ -67,13 +68,20 @@ export const Header = () => {
 							key={key}
 							sx={{ display: { xs: 'none', md: 'flex' } }}
 						>
-							{(navigation.header?.[key as keyof ITopBarNavigation] as INavItem[]).map((item) =>
-								item.children?.length ? (
-									<MenuDropdown key={item.id} item={item} />
-								) : (
-									<MenuButton key={item.id} item={item} />
-								),
-							)}
+							{(navigation.header?.[key as keyof ITopBarNavigation] || []).map((item) => {
+								if (isValidElement(item)) {
+									return item;
+								}
+
+								const navItem = item as INavItem;
+
+								return navItem.children?.length
+									? (
+										<MenuDropdown key={navItem.id} item={navItem} />
+									) : (
+										<MenuButton key={navItem.id} item={navItem} />
+									);
+							})}
 						</ActionBar>
 					))}
 				</StyledToolbar>

@@ -1,3 +1,4 @@
+import { isValidElement } from 'react';
 import { useLocation } from 'react-router-dom';
 import { List, Grid, styled } from '@mui/material';
 
@@ -30,14 +31,22 @@ export const MenuItemsList = () => {
 					id={`sidebar-${key}-menu`}
 					sx={{ p: settings.sidebar.spacedItems ? 1 : 0 }}
 				>
-					{(navigation?.sidebar?.[key as keyof ISideBarNavigation] as INavItem[]).map((nav) => (
-						<MenuItem
-							{...nav}
-							key={nav.id}
-							tooltip={!isNavPaneOpen ? `${nav.label}${nav.disabled ? ' 🚫' : ''}` : undefined}
-							selected={pathname === nav.url}
-						/>
-					))}
+					{(navigation?.sidebar?.[key as keyof ISideBarNavigation] || []).map((item) => {
+						if (isValidElement(item)) {
+							return item;
+						}
+
+						const navItem = item as INavItem;
+
+						return (
+							<MenuItem
+								{...navItem}
+								key={navItem.id}
+								tooltip={!isNavPaneOpen ? `${navItem.label}${navItem.disabled ? ' 🚫' : ''}` : undefined}
+								selected={pathname === navItem.url}
+							/>
+						);
+					})}
 				</List>
 			))}
 		</MenuItemsListWrapper>
