@@ -108,11 +108,21 @@ export const MenuDropdown = ({ item }: { item: INavItem }) => {
 		handleMenuClick,
 	);
 
+	let component = item?.label
+		? <Button {...buttonProps} />
+		: <IconButton {...buttonProps} />;
+
+	if (item?.tooltip) {
+		component = (
+			<Tooltip title={item?.tooltip} arrow={true}>
+				{component}
+			</Tooltip>
+		);
+	}
+
 	return (
 		<div>
-			<Tooltip title={item?.label ?? ''} arrow={true}>
-				{item?.label ? <Button {...buttonProps} /> : <IconButton {...buttonProps} />}
-			</Tooltip>
+			{component}
 			{menu ? (
 				<Popper
 					open={open}

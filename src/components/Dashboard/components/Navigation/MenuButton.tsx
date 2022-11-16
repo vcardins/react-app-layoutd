@@ -10,6 +10,7 @@ import { getDefaultButtonProps } from './utils';
 export const MenuButton = ({ item }: { item: INavItem }) => {
 	const { settings } = useLayoutContext();
 	const navigate = useNavigate();
+
 	const handleClick = useCallback(
 		(event: MouseEvent<HTMLButtonElement>) => {
 			event.stopPropagation();
@@ -23,11 +24,23 @@ export const MenuButton = ({ item }: { item: INavItem }) => {
 		[item],
 	);
 
-	const buttonProps = getDefaultButtonProps<HTMLButtonElement>(item, settings.header.iconPositioning, handleClick);
+	const buttonProps = getDefaultButtonProps<HTMLButtonElement>(
+		item,
+		settings.header.iconPositioning,
+		handleClick,
+	);
+
+	const component = item?.label
+		? <Button {...buttonProps} />
+		: <IconButton {...buttonProps} />;
+
+	if (!item?.tooltip) {
+		return component;
+	}
 
 	return (
-		<Tooltip title={item?.label ?? ''} arrow={true}>
-			{item?.label ? <Button {...buttonProps} /> : <IconButton {...buttonProps} />}
+		<Tooltip title={item?.tooltip} arrow={true}>
+			{component}
 		</Tooltip>
 	);
 };
