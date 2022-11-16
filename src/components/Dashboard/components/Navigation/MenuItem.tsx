@@ -59,7 +59,7 @@ const StyledListItemText = styled(ListItemText, { shouldForwardProp: getForwardP
 	transition: visibility ease 0.25s;
 `);
 
-export const MenuItem = (props: INavItem & { tooltip?: string }) => {
+export const MenuItem = (props: INavItem) => {
 	const { isNavPaneOpen, settings } = useLayoutContext();
 	const { id, url, label, selected, tooltip, onClick } = props;
 	const Icon = (props.Icon ? (props.Icon as INavItem['Icon']) : null) as any;

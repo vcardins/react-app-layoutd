@@ -8,7 +8,9 @@ export interface INavItem {
 	id: string;
 	label?: string;
 	tooltip?: string;
-	Icon?: OverridableComponent<SvgIconTypeMap>;
+	Icon?: OverridableComponent<SvgIconTypeMap> & {
+		muiName: string;
+	};
 	badge?: IBadge;
 	url?: string;
 	disabled?: boolean;

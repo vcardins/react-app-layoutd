@@ -18,12 +18,12 @@ export const Background = styled(Grid, { shouldForwardProp: (prop) => !forwardPr
 	content: '';
 `);
 
-export const Container = styled('div')`
+export const Container = styled('div')(({ theme }) => `
 	max-width: 800px;
 	height: 100%;
-	padding: 1rem;
+	padding: ${theme.spacing(2)};
 	display: flex;
-`;
+`);
 
 export const TwoColumnLayout = ({ id, renderedRoutes, activeRoute }: ILayoutProps) => (
 	<Grid container component="main" sx={{ height: '100%' }}>

@@ -20,17 +20,17 @@ export const StyledToolbar = styled(Toolbar)<{ multiple: boolean }>(({ multiple 
 	justify-content: ${multiple ? 'space-between' : 'end' };
 `);
 
-export const ActionBarGroup = styled(Box)`
+export const ActionBarGroup = styled(Box)(({ theme }) => `
 	flex: 1 1;
 	align-items: center;
 	justify-content: space-between;
-	margin-left: 1rem;
-`;
+	margin-left: ${theme.spacing(2)};
+`);
 
-export const ActionBar = styled(Box)`
-	gap: 10px;
+export const ActionBar = styled(Box)(({ theme }) => `
+	gap:${theme.spacing(1.5)};
 	align-items: center;
-`;
+`);
 
 
 const StyledAppIcon = styled('div')(({ theme }) => `

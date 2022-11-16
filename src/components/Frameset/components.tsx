@@ -1,4 +1,4 @@
-import { Box, styled } from '@mui/material';
+import { Box, Typography, styled } from '@mui/material';
 
 import { IFramesetContentProps } from './types';
 
@@ -19,17 +19,16 @@ export const Header = styled('div')(({ theme }) => `
 
 export const Footer = styled('div')(({ theme }) => `
 	display: flex;
-	padding: 1.5em;
+	padding: ${theme.spacing(2.5)};
 	border-top: 1px solid ${theme.palette.grey['100']};
 `);
 
-export const Title = styled('div')`
-	font-size: 24px;
+export const Title = styled(Typography)(({ theme }) => `
 	display: flex;
 	align-items: center;
-	gap: 10px;
+	gap: ${theme.spacing(1.5)};
 	flex: 1;
-`;
+`);
 
 const forwardProps = ['autoWidth'];
 

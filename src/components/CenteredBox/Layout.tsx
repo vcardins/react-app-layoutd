@@ -23,15 +23,15 @@ const Background = styled('div', { shouldForwardProp: (prop) => !forwardProps.in
 `,
 );
 
-const Container = styled('div')`
+const Container = styled('div')(({ theme }) => `
 	overflow: hidden;
-	padding: 1rem;
+	padding: ${theme.spacing(2)};
 	display: flex;
 	flex-direction: column;
-	border-radius: 8px;
+	border-radius: ${theme.spacing(1.25)};
 	align-items: center;
 	background-color: rgba(255, 255, 255, 0.8);
-`;
+`);
 
 export const CenteredBoxLayout = ({ id, renderedRoutes, activeRoute }: ILayoutProps) => (
 	<Background id={id} backgroundImage={activeRoute?.layout?.config?.backgroundImage}>
