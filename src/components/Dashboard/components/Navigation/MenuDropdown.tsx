@@ -1,5 +1,5 @@
 import { useState, MouseEvent, useMemo, useRef, useCallback } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import { Popper, Fade, Paper, IconButton, Menu, MenuItem, Tooltip, ClickAwayListener, Button } from '@mui/material';
 

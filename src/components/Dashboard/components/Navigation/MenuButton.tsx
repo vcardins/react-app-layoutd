@@ -1,5 +1,5 @@
 import { useCallback, MouseEvent } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import { IconButton, Tooltip, Button } from '@mui/material';
 

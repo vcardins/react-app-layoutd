@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, Dispatch, SetStateAction } from 'react';
 
 import { IRoute, IAppConfig, INavigation, ISettings, TransitionEffect } from './';
 
@@ -27,6 +27,6 @@ export interface ILayoutProps {
 export interface IAppLayoutContext extends Omit<IAppLayoutProps, 'name' | 'theme' | 'settings'>, ILayoutProps {
 	settings: ISettings;
 	toggleNavPane: (value: boolean) => void;
-	updateNavigation: (value: INavigation) => void;
-	updateSettings: (value: ISettings) => void;
+	updateNavigation: Dispatch<SetStateAction<INavigation | undefined>>
+	updateSettings: Dispatch<SetStateAction<ISettings>>
 }

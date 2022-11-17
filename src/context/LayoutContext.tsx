@@ -8,7 +8,6 @@ import {
 	IAppLayoutContext,
 	IAppLayoutProps,
 	LayoutStyle,
-	INavigation,
 	ISettings,
 	Positioning,
 	TransitionEffect,
@@ -54,8 +53,8 @@ const LayoutContext = createContext<IAppLayoutContext>({
 	isNavPaneOpen: false,
 	settings: defaultSettings,
 	toggleNavPane: () => undefined,
-	updateNavigation: (_value: INavigation) => undefined,
-	updateSettings: (_value: ISettings) => undefined,
+	updateNavigation: () => {},
+	updateSettings: () => {},
 });
 
 interface ILayoutState extends Pick<IAppLayoutProps, 'isNavPaneOpen'>{}
@@ -71,14 +70,6 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 	const layoutStyle = activeRoute?.layout?.style ?? LayoutStyle.Empty;
 	const PageLayout = LayoutMap[layoutStyle];
 	const layoutId = `layout-${layoutStyle}`;
-
-	const updateSettings = useCallback((value: Partial<ISettings>) => {
-		setSettings((prevValue) => deepmerge(prevValue, value) as ISettings);
-	}, []);
-
-	const updateNavigation = useCallback((value: Partial<INavigation>) => {
-		setNavigation((prevValue) => deepmerge(prevValue, value));
-	}, []);
 
 	const handleToggleNavPane = useCallback((isNavPaneOpen: boolean) => {
 		toggleNavPane(isNavPaneOpen);
@@ -96,8 +87,8 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 			navigation,
 			isNavPaneOpen,
 			toggleNavPane: handleToggleNavPane,
-			updateSettings,
-			updateNavigation,
+			updateSettings: setSettings,
+			updateNavigation: setNavigation,
 		}),
 		[
 			rest,
@@ -109,8 +100,6 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 			navigation,
 			settings,
 			handleToggleNavPane,
-			updateSettings,
-			updateNavigation,
 		],
 	);
 
