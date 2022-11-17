@@ -5,7 +5,7 @@ import { SerializedStyles } from '@emotion/react';
 
 import { IManifest, INavigation, IPageConfig, ISettings, Subset, TransitionEffect } from './';
 
-interface IProvidersProps {
+export interface IProvidersProps {
 	navigation?: INavigation;
 	children: (navigation?: INavigation) => ReactElement;
 }
