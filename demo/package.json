@@ -1,6 +1,6 @@
 {
 	"name": "react-app-layouts-demo",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"private": true,
 	"scripts": {
 		"clean": "rm -rf ./dist && rm -rf ./.parcel-cache",
@@ -12,26 +12,26 @@
 		"link:app-to-lib": "npm link react-app-layouts"
 	},
 	"devDependencies": {
-		"@parcel/transformer-svg": "^2.7.0",
-		"@parcel/transformer-svg-react": "^2.7.0",
-		"@types/react": "^18.0.21",
-		"@types/react-dom": "^18.0.6",
-		"css-loader": "^6.7.1",
+		"@parcel/transformer-svg": "^2.8.0",
+		"@parcel/transformer-svg-react": "^2.8.0",
+		"@types/react": "^18.0.25",
+		"@types/react-dom": "^18.0.9",
+		"css-loader": "^6.7.2",
 		"npm-run-all": "^4.1.5",
-		"parcel": "^2.7.0",
+		"parcel": "^2.8.0",
 		"parcel-reporter-static-files-copy": "^1.4.0",
 		"process": "^0.11.10",
-		"react-router-dom": "^6.4.2",
+		"react-router-dom": "^6.4.3",
 		"ts-loader": "^9.4.1",
-		"typescript": "^4.8.4"
+		"typescript": "^4.9.3"
 	},
 	"dependencies": {
-		"@emotion/react": "^11.10.4",
-		"@emotion/styled": "^11.10.4",
-		"@mui/icons-material": "^5.10.9",
-		"@mui/material": "^5.10.10",
+		"@emotion/react": "^11.10.5",
+		"@emotion/styled": "^11.10.5",
+		"@mui/icons-material": "^5.10.14",
+		"@mui/material": "^5.10.14",
 		"react": "^18",
-		"react-app-layouts": "^0.0.4",
+		"react-app-layouts": "^1.1.2",
 		"react-dom": "^18",
 		"screenfull": "^6.0.2"
 	},
