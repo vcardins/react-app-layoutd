@@ -1,7 +1,7 @@
 import { IRoute, IPageLayout } from './';
 
-export interface IPageConfig<TPermission = string> {
-	permissions?: TPermission[];
-	routes: IRoute<TPermission>[];
+export interface IPageConfig {
+	permissions?: (string | number)[];
+	routes: IRoute[];
 	layout?: IPageLayout;
 }

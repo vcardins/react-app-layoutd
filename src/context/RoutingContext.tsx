@@ -59,8 +59,8 @@ export const RoutingContextProvider = (props: IRoutingContextProps) => {
 	);
 };
 
-export const useRoutingContext = <TRoute = string>() => {
-	const context = useContext(RoutingContext) as IRoutingContext<TRoute>;
+export const useRoutingContext = () => {
+	const context = useContext(RoutingContext) as IRoutingContext;
 	if (context === undefined) {
 		throw new Error('RoutingContext not provided to calling context');
 	}

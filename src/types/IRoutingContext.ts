@@ -7,7 +7,7 @@ export interface IRoutingContextProps extends Pick<IAppConfig, 'pages'> {
 	children?: ReactNode;
 }
 
-export interface IRoutingContext<TRoute = string> {
-	activeRoute: IRoute<TRoute>;
+export interface IRoutingContext {
+	activeRoute: IRoute;
 	renderedRoutes: ReactNode;
 }
