@@ -45,10 +45,6 @@ export const Header = () => {
 	const { navigation, Icon, settings } = useLayoutContext();
 	const headerNavKeys = Object.keys(navigation?.header ?? {});
 
-	if (!navigation?.header || !headerNavKeys?.length) {
-		return null;
-	}
-
 	return (
 		<StyledAppBar elevation={settings.header.shadowElevation}>
 			<MenuBarToggle source="header" />
@@ -68,7 +64,7 @@ export const Header = () => {
 							key={key}
 							sx={{ display: { xs: 'none', md: 'flex' } }}
 						>
-							{(navigation.header?.[key as keyof ITopBarNavigation] || []).map((item) => {
+							{(navigation?.header?.[key as keyof ITopBarNavigation] || []).map((item) => {
 								if (isValidElement(item)) {
 									return item;
 								}
