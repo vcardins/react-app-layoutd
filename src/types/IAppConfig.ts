@@ -1,9 +1,14 @@
-import { PropsWithChildren, ReactElement } from 'react';
+import { ReactElement } from 'react';
 
 import { Theme } from '@mui/material';
 import { SerializedStyles } from '@emotion/react';
 
 import { IManifest, INavigation, IPageConfig, ISettings, Subset, TransitionEffect } from './';
+
+interface IProvidersProps {
+	navigation?: INavigation;
+	children: (navigation?: INavigation) => ReactElement;
+}
 
 export interface IAppConfig {
 	container?: string;
@@ -18,6 +23,6 @@ export interface IAppConfig {
 	settings?: Subset<ISettings>;
 	pages: IPageConfig[];
 	App?: () => ReactElement;
-	Providers?: (props: PropsWithChildren<unknown>) => ReactElement;
+	Providers?: (props: IProvidersProps) => ReactElement;
 	version?: string | ReactElement;
 }

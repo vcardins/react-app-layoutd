@@ -1,8 +1,8 @@
-import { StrictMode } from 'react';
+import { StrictMode, isValidElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { IAppConfig } from './types';
+import { IAppConfig, INavigation } from './types';
 import { LayoutContextProvider, RoutingContextProvider } from './context';
 
 export const render = (props: IAppConfig) => {
@@ -22,11 +22,19 @@ export const render = (props: IAppConfig) => {
 				pages={rest.pages}
 				name={rest.metadata.short_name}
 			>
-				<Providers>
-					{App
-						? <App />
-						: <LayoutContextProvider {...rest} />
-					}
+				<Providers navigation={rest.navigation}>
+					{(navigation?: INavigation) => {
+						if (isValidElement(App)) {
+							return <App />;
+						}
+
+						return (
+							<LayoutContextProvider
+								{...rest}
+								navigation={navigation}
+							/>
+						);
+					}}
 				</Providers>
 			</RoutingContextProvider>
 		</Router>
