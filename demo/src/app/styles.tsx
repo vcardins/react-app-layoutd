@@ -10,11 +10,6 @@ export const styles = css`
 		-webkit-font-smoothing: antialiased;
 	}
 
-	html {
-		line-height: 1.5;
-		font-size: 14px;
-	}
-
 	/* wrapping these attributes with @media screen so printing is not affected */
 	@media screen {
 		html,

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { IRoute, IAppConfig, INavigation, ISettings, TransitionEffect } from './';
 
-export interface IAppLayoutProps extends Pick<IAppConfig, 'theme' | 'navigation' | 'metadata' | 'Icon' | 'settings' | 'transitionEffect'> {
+export interface IAppLayoutProps extends Pick<IAppConfig, 'theme' | 'styles' | 'navigation' | 'metadata' | 'Icon' | 'settings' | 'transitionEffect'> {
 	children?: ReactNode;
 	components?: {
 		header?: ReactNode;

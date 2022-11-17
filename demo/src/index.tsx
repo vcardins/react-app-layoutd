@@ -1,11 +1,12 @@
 import { render, TransitionEffect } from 'react-app-layouts';
 
-import { pages, navigation, buildTheme, Providers } from './app';
+import { pages, navigation, buildTheme, styles, Providers } from './app';
 import metadata from './manifest.json';
 import { Logo } from './logo';
 
 render({
 	theme: buildTheme(undefined, metadata.theme_color),
+	styles,
 	metadata,
 	navigation,
 	pages,

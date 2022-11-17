@@ -1,6 +1,6 @@
 import { useMemo, createContext, useContext, useState, useCallback } from 'react';
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
-import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
+import { Global, ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 import { deepmerge } from 'deepmerge-ts';
 
 import {
@@ -61,7 +61,7 @@ const LayoutContext = createContext<IAppLayoutContext>({
 interface ILayoutState extends Pick<IAppLayoutProps, 'isNavPaneOpen'>{}
 
 export const LayoutContextProvider = (props: IAppLayoutProps) => {
-	const { metadata, children, theme, transitionEffect, ...rest } = props;
+	const { metadata, children, theme, styles, transitionEffect, ...rest } = props;
 	const { storedValue, setStoredValue } = useLocalStorage<ILayoutState>('layoutState', { isNavPaneOpen: !!rest.isNavPaneOpen });
 	const [isNavPaneOpen, toggleNavPane] = useState(storedValue.isNavPaneOpen);
 	const [settings, setSettings] = useState(deepmerge(defaultSettings, rest.settings) as ISettings);
@@ -120,6 +120,7 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 				<EmotionThemeProvider theme={theme}>
 					<>
 						<CssBaseline />
+						{ styles ? <Global styles={styles} /> : null}
 						<PageLayout
 							id={layoutId}
 							activeRoute={activeRoute}
