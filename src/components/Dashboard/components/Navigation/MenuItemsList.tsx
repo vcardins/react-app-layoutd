@@ -16,16 +16,17 @@ const MenuItemsListWrapper = styled(Grid)`
 `;
 
 export const MenuItemsList = () => {
-	const { isNavPaneOpen, navigation, settings } = useLayoutContext();
 	const { pathname } = useLocation();
+	const { isNavPaneOpen, navigation, settings } = useLayoutContext();
+	const sidebarKeys = Object.keys(navigation?.sidebar ?? {});
 
-	if (!navigation?.sidebar?.top?.length && !navigation?.sidebar?.bottom?.length) {
+	if (!sidebarKeys?.length) {
 		return null;
 	}
 
 	return (
 		<MenuItemsListWrapper>
-			{Object.keys(navigation?.sidebar).map((key) => (
+			{sidebarKeys.map((key) => (
 				<List
 					key={key}
 					id={`sidebar-${key}-menu`}

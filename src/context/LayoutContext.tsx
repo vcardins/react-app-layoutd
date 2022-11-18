@@ -74,6 +74,8 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 		setStoredValue({ ... storedValue, isNavPaneOpen });
 	}, [setStoredValue, storedValue]);
 
+	const hasSideBarNav = useMemo(() => !!navigation?.sidebar?.top?.length || !!navigation?.sidebar?.bottom?.length, [navigation]);
+
 	const value = useMemo<IAppLayoutContext>(
 		() => ({
 			...rest,
@@ -81,7 +83,13 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 			id: layoutId,
 			renderedRoutes,
 			activeRoute,
-			settings,
+			settings: {
+				...settings,
+				sidebar: {
+					...settings?.sidebar,
+					display: !!settings?.sidebar?.display && hasSideBarNav,
+				},
+			},
 			navigation,
 			isNavPaneOpen,
 			toggleNavPane: handleToggleNavPane,
@@ -97,6 +105,7 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 			isNavPaneOpen,
 			navigation,
 			settings,
+			hasSideBarNav,
 			handleToggleNavPane,
 		],
 	);

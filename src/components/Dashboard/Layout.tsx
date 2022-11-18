@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { Toolbar, Box, LinearProgress, styled } from '@mui/material';
 import { animated, UseTransitionProps, useTransition } from 'react-spring';
 
+import { useLayoutContext } from '../../context';
 import { ILayoutProps, TransitionEffect } from '../../types';
 import { Footer, Header, Main, MenuBar } from './components';
 
@@ -35,6 +36,8 @@ const transitionsOptions = {
 
 export const DashboardLayout = ({ id, transitionEffect = TransitionEffect.Fade, renderedRoutes }: ILayoutProps) => {
 	const location = useLocation();
+	const { settings } = useLayoutContext();
+
 	const transitions = useTransition(location, transitionsOptions[transitionEffect]);
 
 	return (
@@ -42,14 +45,17 @@ export const DashboardLayout = ({ id, transitionEffect = TransitionEffect.Fade, 
 			<Header />
 			<Toolbar />
 			<InnerContainer>
-				<MenuBar />
+				{settings.sidebar?.display ? <MenuBar /> : null}
 				<Main>
 					<Suspense fallback={<LinearProgress />}>
-						{transitions((styles, location) => (
-							<animated.div key={location.pathname} style={styles}>
-								{renderedRoutes}
-							</animated.div>
-						))}
+						{settings.sidebar?.display
+							? transitions((styles, location) => (
+								<animated.div key={location.pathname} style={styles}>
+									{renderedRoutes}
+								</animated.div>
+							))
+							: renderedRoutes
+						}
 					</Suspense>
 				</Main>
 			</InnerContainer>

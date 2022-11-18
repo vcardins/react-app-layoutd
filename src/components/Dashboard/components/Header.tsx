@@ -52,7 +52,7 @@ export const Header = () => {
 			<Box display="flex" flex="1">
 				{Icon ?
 					(
-						<StyledAppIcon>
+						<StyledAppIcon sx={{ ml: settings.sidebar?.display ? 0 : 2 }}>
 							{Icon}
 						</StyledAppIcon>
 					)
