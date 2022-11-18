@@ -6,8 +6,9 @@ import { Title } from './Title';
 
 import { useLayoutContext } from '../../../context';
 import { INavItem, IHeaderSettings, ITopBarNavigation } from '../../../types';
+import { shouldForwardProp } from '../../utils';
 
-export const StyledAppBar = styled(AppBar)<IHeaderSettings>(({ theme, color, backgroundColor }) => `
+export const StyledAppBar = styled(AppBar, shouldForwardProp(['color', 'backgroundColor']) )<Pick<IHeaderSettings, 'color' | 'backgroundColor'>>(({ theme, color, backgroundColor }) => `
 	display: flex;
 	width: 100%;
 	background-color: ${backgroundColor ?? theme.palette.common.white};
@@ -43,9 +44,10 @@ const StyledAppIcon = styled('div')(({ theme }) => `
 export const Header = () => {
 	const { navigation, Icon, settings } = useLayoutContext();
 	const headerNavKeys = Object.keys(navigation?.header ?? {});
+	const { color, backgroundColor } = settings.header;
 
 	return (
-		<StyledAppBar {...settings.header}>
+		<StyledAppBar color={color} backgroundColor={backgroundColor} >
 			<MenuBarToggle source="header" />
 			<Box display="flex" flex="1">
 				{Icon ?

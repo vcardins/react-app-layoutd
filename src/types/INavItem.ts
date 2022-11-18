@@ -1,5 +1,5 @@
 import { MouseEvent, ReactNode } from 'react';
-import type { IconTypeMap } from '@mui/material';
+import type { SvgIconTypeMap } from '@mui/material';
 import type { OverridableComponent } from '@mui/material/OverridableComponent';
 
 import { IBadge, NavItemType } from './';
@@ -8,7 +8,7 @@ export interface INavItem {
 	id: string;
 	label?: string;
 	tooltip?: string;
-	Icon?: OverridableComponent<IconTypeMap> & {
+	Icon?: OverridableComponent<SvgIconTypeMap> & {
 		muiName: string;
 	} | ReactNode;
 	badge?: IBadge;

@@ -15,7 +15,7 @@ render({
 	Providers,
 	Icon: <Logo size={40} />,
 	settings: {
-		header: { shadowElevation: 1 },
+		header: { elevation: 1 },
 		sidebar: { spacedItems: true, width: { collapsed: '55px', expanded: '220px' } },
 	},
 });

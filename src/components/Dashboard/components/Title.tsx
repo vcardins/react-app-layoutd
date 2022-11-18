@@ -1,6 +1,7 @@
 import { Typography, styled } from '@mui/material';
 
 import { useLayoutContext } from '../../../context';
+import { shouldForwardProp } from '../../utils';
 
 export const StyledAppTitleWrapper = styled('div')`
 	display: flex;
@@ -21,7 +22,7 @@ export const StyledAppSubTitle = styled(StyledAppTitle)`
 	font-size: 80%;
 `;
 
-export const StyledAppHeaderWrapper = styled('div', { shouldForwardProp: (prop) => prop !== 'gapped' })<{ gapped?: boolean; }>(({ gapped }) => `
+export const StyledAppHeaderWrapper = styled('div', shouldForwardProp(['gapped']) )<{ gapped?: boolean; }>(({ gapped }) => `
 	display: flex;
 	align-items: center;
 	gap: ${gapped ? '2em' : 0};

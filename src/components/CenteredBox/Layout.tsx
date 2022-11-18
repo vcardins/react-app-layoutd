@@ -2,10 +2,9 @@ import { Suspense } from 'react';
 import { styled, LinearProgress } from '@mui/material';
 
 import { ILayoutProps } from '../../types';
+import { shouldForwardProp } from '../utils';
 
-const forwardProps = ['backgroundImage'];
-
-const Background = styled('div', { shouldForwardProp: (prop) => !forwardProps.includes(prop as string) })<{ backgroundImage?: string; }>( ({ theme, backgroundImage }) => `
+const Background = styled('div', shouldForwardProp(['backgroundImage']) )<{ backgroundImage?: string; }>( ({ theme, backgroundImage }) => `
 	display: flex;
 	flex-direction: row;
 	overflow: hidden;

@@ -1,10 +1,10 @@
 import { isValidElement, ReactNode, MouseEvent } from 'react';
 import { ButtonProps, Icon } from '@mui/material';
-import type { IconTypeMap } from '@mui/material';
+import type { SvgIconTypeMap } from '@mui/material';
 import type { OverridableComponent } from '@mui/material/OverridableComponent';
 import { INavItem, Positioning } from '../types';
 
-export const getIcon = (rawIcon?: OverridableComponent<IconTypeMap> | ReactNode, size?: IconTypeMap['props']['fontSize'] | number) => {
+export const getIcon = (rawIcon?: OverridableComponent<SvgIconTypeMap> | ReactNode, size?: SvgIconTypeMap['props']['fontSize'] | number) => {
 	if (!rawIcon) return null;
 
 	if (isValidElement(rawIcon)) {
@@ -12,7 +12,7 @@ export const getIcon = (rawIcon?: OverridableComponent<IconTypeMap> | ReactNode,
 	}
 
 	const iconProps = Object.assign(
-		{ component: rawIcon as OverridableComponent<IconTypeMap> },
+		{ component: rawIcon as OverridableComponent<SvgIconTypeMap> },
 		Number.isFinite(size)
 			? { sx: { fontSize: size } }
 			: { fontSize: size }
@@ -52,3 +52,6 @@ export const getDefaultButtonProps = <T extends object>(
 
 	return buttonProps;
 };
+
+export const shouldForwardProp = (forwardProps: string[]) =>
+	({ shouldForwardProp: (prop: string) => !forwardProps.includes(prop as string) });

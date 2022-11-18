@@ -5,6 +5,7 @@ import { MenuItemsList } from './MenuItemsList';
 import { MenuBarToggle } from './MenuBarToggle';
 
 import { useLayoutContext } from '../../../../context';
+import { shouldForwardProp } from '../../../utils';
 
 const getTransition = (theme: Theme, tag: 'enteringScreen' | 'leavingScreen') =>
 	theme.transitions.create('width', {
@@ -12,7 +13,7 @@ const getTransition = (theme: Theme, tag: 'enteringScreen' | 'leavingScreen') =>
 		duration: theme.transitions.duration[tag] as number,
 	});
 
-export const StyledNavigation = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'isOpened' })<{
+export const StyledNavigation = styled(MuiDrawer, shouldForwardProp(['isOpened']) )<{
 	isOpened: boolean;
 	widths: { collapsed: CSSProperties['width']; expanded: CSSProperties['width']; }
 }>(({ isOpened, widths, theme }) => ({
