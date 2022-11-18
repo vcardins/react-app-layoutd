@@ -34,7 +34,7 @@ export const ActionBar = styled(Box)(({ theme }) => `
 	align-items: center;
 `);
 
-const StyledAppIcon = styled('div')(({ theme }) => `
+const StyledAppIcon = styled(Box)(({ theme }) => `
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -44,10 +44,14 @@ const StyledAppIcon = styled('div')(({ theme }) => `
 export const Header = () => {
 	const { navigation, Icon, settings } = useLayoutContext();
 	const headerNavKeys = Object.keys(navigation?.header ?? {});
-	const { color, backgroundColor } = settings.header;
+	const { color, backgroundColor, elevation } = settings.header;
 
 	return (
-		<StyledAppBar color={color} backgroundColor={backgroundColor} >
+		<StyledAppBar
+			color={color}
+			backgroundColor={backgroundColor}
+			elevation={elevation}
+		>
 			<MenuBarToggle source="header" />
 			<Box display="flex" flex="1">
 				{Icon ?
