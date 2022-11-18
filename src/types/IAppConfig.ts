@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 import { Theme } from '@mui/material';
 import { SerializedStyles } from '@emotion/react';
@@ -16,7 +16,7 @@ export interface IAppConfig {
 	strictMode?: boolean;
 	theme: Theme;
 	styles?: SerializedStyles;
-	Icon?: JSX.Element;
+	Icon?: ReactNode;
 	transitionEffect?: TransitionEffect;
 	metadata: IManifest;
 	navigation?: INavigation;

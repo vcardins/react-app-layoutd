@@ -5,13 +5,13 @@ import { MenuDropdown, MenuButton, MenuBarToggle } from './Navigation';
 import { Title } from './Title';
 
 import { useLayoutContext } from '../../../context';
-import { INavItem, ITopBarNavigation } from '../../../types';
+import { INavItem, IHeaderSettings, ITopBarNavigation } from '../../../types';
 
-export const StyledAppBar = styled(AppBar)(({ theme }) => `
+export const StyledAppBar = styled(AppBar)<IHeaderSettings>(({ theme, color, backgroundColor }) => `
 	display: flex;
 	width: 100%;
-	background-color: ${theme.palette.common.white};
-	color: ${theme.palette.common.black};
+	background-color: ${backgroundColor ?? theme.palette.common.white};
+	color: ${color ?? theme.palette.common.black};
 	flex-direction: row;
 `);
 
@@ -29,16 +29,15 @@ export const ActionBarGroup = styled(Box)(({ theme }) => `
 `);
 
 export const ActionBar = styled(Box)(({ theme }) => `
-	gap:${theme.spacing(1.5)};
+	gap: ${theme.spacing(1.5)};
 	align-items: center;
 `);
-
 
 const StyledAppIcon = styled('div')(({ theme }) => `
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin: 0 ${theme.spacing(3)} 0 ${theme.spacing(2)};
+	margin-right: ${theme.spacing(2)};
 `);
 
 export const Header = () => {
@@ -46,7 +45,7 @@ export const Header = () => {
 	const headerNavKeys = Object.keys(navigation?.header ?? {});
 
 	return (
-		<StyledAppBar elevation={settings.header.shadowElevation}>
+		<StyledAppBar {...settings.header}>
 			<MenuBarToggle source="header" />
 			<Box display="flex" flex="1">
 				{Icon ?

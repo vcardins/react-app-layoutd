@@ -5,7 +5,7 @@ import { Popper, Fade, Paper, IconButton, Menu, MenuItem, Tooltip, ClickAwayList
 
 import { useLayoutContext } from '../../../../context';
 import { INavItem } from '../../../../types';
-import { getDefaultButtonProps } from './utils';
+import { getDefaultButtonProps, getIcon } from '../../../utils';
 
 export const MenuDropdown = ({ item }: { item: INavItem }) => {
 	const navigate = useNavigate();
@@ -54,7 +54,7 @@ export const MenuDropdown = ({ item }: { item: INavItem }) => {
 						aria-haspopup="true"
 						color="inherit"
 					>
-						<child.Icon fontSize="small" />
+						{getIcon(child.Icon, 'small')}
 					</IconButton>
 				)}
 				{child.label}

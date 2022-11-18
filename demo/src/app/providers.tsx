@@ -1,10 +1,9 @@
-import { memo, PropsWithChildren } from 'react';
+import { memo } from 'react';
+import { IProvidersProps } from 'react-app-layouts';
 
-function ProvidersFunc({ children }: PropsWithChildren<unknown>) {
+function ProvidersFunc({ children, navigation }: IProvidersProps) {
 	return (
-		<>
-			{children}
-		</>
+		children(navigation)
 	);
 }
 
