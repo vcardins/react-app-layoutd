@@ -2,6 +2,7 @@ import { isValidElement, ReactNode, MouseEvent } from 'react';
 import { ButtonProps, Icon } from '@mui/material';
 import type { SvgIconTypeMap } from '@mui/material';
 import type { OverridableComponent } from '@mui/material/OverridableComponent';
+
 import { INavItem, Positioning } from '../types';
 
 export const getIcon = (rawIcon?: OverridableComponent<SvgIconTypeMap> | ReactNode, size?: SvgIconTypeMap['props']['fontSize'] | number) => {

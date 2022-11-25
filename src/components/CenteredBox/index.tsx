@@ -2,25 +2,7 @@ import { Suspense } from 'react';
 import { styled, LinearProgress } from '@mui/material';
 
 import { ILayoutProps } from '../../types';
-import { shouldForwardProp } from '../utils';
-
-const Background = styled('div', shouldForwardProp(['backgroundImage']) )<{ backgroundImage?: string; }>( ({ theme, backgroundImage }) => `
-	display: flex;
-	flex-direction: row;
-	overflow: hidden;
-	height: 100%;
-	animation: jss6 60s infinite;
-	background-size: auto;
-	background-color: ${theme.palette.common.white};
-	background-image: url(${backgroundImage});
-	background-repeat: no-repeat;
-
-	align-items: center;
-	justify-content: center;
-
-	content: '';
-`,
-);
+import { Background } from '../Background';
 
 const Container = styled('div')(({ theme }) => `
 	overflow: hidden;
@@ -33,7 +15,7 @@ const Container = styled('div')(({ theme }) => `
 `);
 
 export const CenteredBoxLayout = ({ id, renderedRoutes, activeRoute }: ILayoutProps) => (
-	<Background id={id} backgroundImage={activeRoute?.layout?.config?.backgroundImage}>
+	<Background id={id} {...activeRoute.layout?.config} centered>
 		<Container>
 			<Suspense fallback={<LinearProgress />}>{renderedRoutes}</Suspense>
 		</Container>

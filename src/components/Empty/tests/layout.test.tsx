@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 
 import 'jest-canvas-mock';
 
-import { EmptyLayout } from '../Layout';
+import { EmptyLayout } from '../';
 import { IRoute } from '../../../types';
 
 describe('Common render', () => {

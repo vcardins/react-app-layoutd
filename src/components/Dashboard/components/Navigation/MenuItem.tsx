@@ -10,7 +10,7 @@ const StyledNavLink = styled(NavLink)`
 	color: inherit;
 `;
 
-export const StyledListItem = styled(ListItem, shouldForwardProp(['backgroundImage', 'spaced', 'isNavPaneOpen', 'iconPositioning']) )<{iconPositioning?: Positioning; spaced?: boolean; isNavPaneOpen?: boolean }>(({ iconPositioning, spaced, theme, isNavPaneOpen }) => `
+export const StyledListItem = styled(ListItem, shouldForwardProp(['spaced', 'isNavPaneOpen', 'iconPositioning']) )<{iconPositioning?: Positioning; spaced?: boolean; isNavPaneOpen?: boolean }>(({ theme, iconPositioning, spaced, isNavPaneOpen }) => `
 	padding: ${theme.spacing(0.5)} 0 ${theme.spacing(0.5)} ${isNavPaneOpen ? theme.spacing(2) : 0};
 	margin-bottom: ${spaced ? theme.spacing(0.75) : 0};
 	border-radius: ${spaced ? '4px' : 0};

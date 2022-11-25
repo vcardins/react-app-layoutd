@@ -1,4 +1,4 @@
-import { memo, CSSProperties } from 'react';
+import { CSSProperties } from 'react';
 import { Theme, useMediaQuery, useTheme, Drawer as MuiDrawer, styled } from '@mui/material';
 
 import { MenuItemsList } from './MenuItemsList';
@@ -30,7 +30,7 @@ export const StyledNavigation = styled(MuiDrawer, shouldForwardProp(['isOpened']
 	},
 }));
 
-export const MenuBar = memo(() => {
+export const MenuBar = () => {
 	const { isNavPaneOpen, toggleNavPane, NavPaneHeader = null, settings } = useLayoutContext();
 	const theme = useTheme();
 	const isLargeScreen = useMediaQuery(theme.breakpoints.up('sm'));
@@ -52,4 +52,4 @@ export const MenuBar = memo(() => {
 			<MenuBarToggle source="sidebar" />
 		</StyledNavigation>
 	);
-});
+};

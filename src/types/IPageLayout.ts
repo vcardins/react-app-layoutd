@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+
 import { LayoutStyle, ScrollOptions, ToolbarPositions, LayoutMode } from './';
 
 interface IComponentConfig {
@@ -21,6 +23,7 @@ export interface ILayoutConfig {
 	footer?: IFooterConfig;
 	mode?: LayoutMode;
 	backgroundImage?: string;
+	backgroundColor?: CSSProperties['backgroundColor'];
 }
 
 export interface IPageLayout {

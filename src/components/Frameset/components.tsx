@@ -1,6 +1,7 @@
 import { Box, Typography, styled } from '@mui/material';
 
 import { IFramesetContentProps } from './types';
+import { shouldForwardProp } from '../utils';
 
 export const Container = styled('div')`
 	display: flex;
@@ -30,9 +31,7 @@ export const Title = styled(Typography)(({ theme }) => `
 	flex: 1;
 `);
 
-const forwardProps = ['autoWidth'];
-
-export const Content = styled(Box, { shouldForwardProp: (prop) => !forwardProps.includes(prop as string) })<IFramesetContentProps>(({ margin, autoWidth, overflow }) => `
+export const Content = styled(Box, shouldForwardProp(['autoWidth']))<IFramesetContentProps>(({ margin, autoWidth, overflow }) => `
 	position: relative;
 	width: 100%;
 	overflow: ${overflow};

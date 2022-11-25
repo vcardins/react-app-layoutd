@@ -6,7 +6,8 @@ import { animated, UseTransitionProps, useTransition } from 'react-spring';
 
 import { useLayoutContext } from '../../context';
 import { ILayoutProps, TransitionEffect } from '../../types';
-import { Footer, Header, Main, MenuBar } from './components';
+import { Footer, Header, MenuBar } from './components';
+import { Background } from '../Background';
 
 const OuterContainer = styled(Box)`
 	display: flex;
@@ -34,30 +35,32 @@ const transitionsOptions = {
 	},
 } as Record<TransitionEffect, UseTransitionProps> ;
 
-export const DashboardLayout = ({ id, transitionEffect = TransitionEffect.Fade, renderedRoutes }: ILayoutProps) => {
+export const DashboardLayout = ({ id, transitionEffect = TransitionEffect.Fade, renderedRoutes, activeRoute }: ILayoutProps) => {
 	const location = useLocation();
 	const { settings } = useLayoutContext();
 
 	const transitions = useTransition(location, transitionsOptions[transitionEffect]);
 
 	return (
-		<OuterContainer id={id}>
+		<OuterContainer>
 			<Header />
 			<Toolbar />
 			<InnerContainer>
 				{settings.sidebar?.display ? <MenuBar /> : null}
-				<Main>
-					<Suspense fallback={<LinearProgress />}>
-						{settings.sidebar?.display
-							? transitions((styles, location) => (
-								<animated.div key={location.pathname} style={styles}>
-									{renderedRoutes}
-								</animated.div>
-							))
-							: renderedRoutes
-						}
-					</Suspense>
-				</Main>
+				<Background id={id} {...activeRoute.layout?.config}>
+					<Box flex="1">
+						<Suspense fallback={<LinearProgress />}>
+							{settings.sidebar?.display
+								? transitions((styles, location) => (
+									<animated.div key={location.pathname} style={styles}>
+										{renderedRoutes}
+									</animated.div>
+								))
+								: renderedRoutes
+							}
+						</Suspense>
+					</Box>
+				</Background>
 			</InnerContainer>
 			<Footer />
 		</OuterContainer>
