@@ -32,22 +32,26 @@ export const MenuItemsList = () => {
 					id={`sidebar-${key}-menu`}
 					sx={{ p: settings.sidebar.spacedItems ? 1 : 0 }}
 				>
-					{(navigation?.sidebar?.[key as keyof ISideBarNavigation] || []).map((item) => {
-						if (isValidElement(item)) {
-							return item;
-						}
+					{(navigation?.sidebar?.[key as keyof ISideBarNavigation] || [])
+						.map((item) => {
+							if (isValidElement(item)) {
+								return item;
+							}
 
-						const navItem = item as INavItem;
+							const navItem = item as INavItem;
 
-						return (
-							<MenuItem
-								{...navItem}
-								key={navItem.id}
-								tooltip={!isNavPaneOpen ? `${navItem.label}${navItem.disabled ? ' 🚫' : ''}` : undefined}
-								selected={pathname === navItem.url}
-							/>
-						);
-					})}
+							if (navItem.hidden) return;
+
+							return (
+								<MenuItem
+									{...navItem}
+									key={navItem.id}
+									tooltip={!isNavPaneOpen ? `${navItem.label}${navItem.disabled ? ' 🚫' : ''}` : undefined}
+									selected={pathname === navItem.url}
+								/>
+							);
+						})
+					}
 				</List>
 			))}
 		</MenuItemsListWrapper>

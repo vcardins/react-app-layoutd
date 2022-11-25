@@ -14,6 +14,7 @@ export interface INavItem {
 	badge?: IBadge;
 	url?: string;
 	disabled?: boolean;
+	hidden?: boolean;
 	type?: NavItemType;
 	selected?: boolean;
 	onClick?: (e: MouseEvent<HTMLElement>, item: INavItem) => void;
