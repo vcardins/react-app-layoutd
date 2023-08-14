@@ -6,6 +6,7 @@ export interface IRoute extends Omit<RouteObject, 'path'>, Pick<IPageConfig, 'pe
 	path: string;
 	metadata?: IPageMetaData;
 	layout?: IPageLayout;
+	replace?: boolean;
 }
 
 export type KeyedRoute = Record<string, IRoute>;

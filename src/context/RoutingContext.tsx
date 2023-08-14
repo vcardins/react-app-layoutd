@@ -10,7 +10,7 @@ const RoutingContext = createContext<IRoutingContext>({
 
 export { Link, NavLink, useNavigate, useLocation };
 
-export const RoutingContextProvider = (props: IRoutingContextProps) => {
+export const RoutingProvider = (props: IRoutingContextProps) => {
 	const { name, children, pages } = props;
 	const location = useLocation();
 

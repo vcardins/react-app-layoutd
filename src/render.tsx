@@ -5,7 +5,7 @@ import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
 import { Global, ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 
 import { IAppConfig, INavigation } from './types';
-import { LayoutContextProvider, RoutingContextProvider } from './context';
+import { LayoutContextProvider, RoutingProvider } from './context';
 
 export const render = (props: IAppConfig) => {
 	const {
@@ -27,25 +27,22 @@ export const render = (props: IAppConfig) => {
 					<CssBaseline />
 					{ styles ? <Global styles={styles} /> : null}
 
-					<RoutingContextProvider
+					<RoutingProvider
 						pages={rest.pages}
 						name={rest.metadata.short_name}
 					>
 						<Providers navigation={rest.navigation}>
-							{(navigation?: INavigation) => {
-								if (isValidElement(App)) {
-									return <App />;
-								}
-
-								return (
+							{(navigation?: INavigation) => isValidElement(App)
+								? <App />
+								: (
 									<LayoutContextProvider
 										{...rest}
 										navigation={navigation}
 									/>
-								);
-							}}
+								)
+							}
 						</Providers>
-					</RoutingContextProvider>
+					</RoutingProvider>
 				</EmotionThemeProvider>
 			</MuiThemeProvider>
 		</Router>

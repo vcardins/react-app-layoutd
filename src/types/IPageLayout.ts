@@ -22,7 +22,7 @@ export interface ILayoutConfig {
 	toolbar?: IToolbarConfig;
 	footer?: IFooterConfig;
 	mode?: LayoutMode;
-	backgroundImage?: string;
+	backgroundImage?: CSSProperties['backgroundImage'];
 	backgroundColor?: CSSProperties['backgroundColor'];
 }
 

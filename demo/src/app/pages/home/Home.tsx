@@ -7,7 +7,7 @@ const Home = memo(() => (
 		id="page-home"
 		contentProps={{ overflow: 'auto', padding: 2 }}
 	>
-		<div>Dashboard</div>
+		Dashboard
 	</Frameset>
 ));
 

@@ -9,7 +9,7 @@ const { palette } = createTheme();
 
 const TOOLBAR_MIN_HEIGHT = '56px';
 
-export const buildTheme = (mode = ThemeMode.Light, themeColor?: string) =>
+export const buildTheme = ({ mode = ThemeMode.Light, themeColor }: { mode?: ThemeMode, themeColor?: string }) =>
 	responsiveFontSizes(
 		createTheme({
 			palette: {
